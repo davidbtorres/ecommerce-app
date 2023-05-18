@@ -1,0 +1,27 @@
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.search-bar {
+    margin-right: 10px;
+}
+
+.site-links {
+    display: flex;
+    gap: 10px;
+}
+
+.cart-icon,
+.user-profile {
+    margin-left: 10px;
+}  
