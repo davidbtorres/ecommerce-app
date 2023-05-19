@@ -1,5 +1,4 @@
 import './App.css';
-import ProductList from './components/ProductList';
 import Navbar from './components/Navbar';
 import Categories from './components/Categories';
 

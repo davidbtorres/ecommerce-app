@@ -17,8 +17,8 @@ function Link({ to, children }: { to: string; children: React.ReactNode }) {
 function Navbar() {
   return (
     <nav>
-      <a href='/'>
-        <div className="logo">E-Commerce App</div>
+      <a className="logo" href='/'>
+        <div>E-Commerce App</div>
       </a>
       <div className="search-bar">
         {/* Search bar component or input field */}
