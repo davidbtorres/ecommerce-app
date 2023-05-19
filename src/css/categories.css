@@ -1,9 +1,11 @@
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(200px, 1fr)); /* Three columns in the grid */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 5px; /* Spacing between grid items */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    margin-left: 15%;
+    margin-right: 15%;
 }
   
 .product-card {
@@ -12,10 +14,12 @@
     text-align: center;
     width: 200px;
     min-height: 300px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 .product-card img {
-    width: 100%; /* Adjust the width as needed */
+    width: 80%; /* Adjust the width as needed */
     height: auto; /* Allow the height to adjust proportionally */
 }
 
