@@ -13,3 +13,27 @@
 .cart-panel.open {
     transform: translateX(0);
 }
+
+.cart-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+.cart-product-card {
+    display: grid;
+    background-color: #f0f0f0;
+    grid-template-columns: 30fr 50fr 20fr;
+    height: 15rem;
+    width: 100%;
+}
+
+.cart-product-card img {
+    width: 80%;
+    height: auto;
+}
+
+.cart-product-card button {
+    width: 80%;
+    height: 50px;
+}

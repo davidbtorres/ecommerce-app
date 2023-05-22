@@ -3,6 +3,7 @@ import './../css/navbar.css';
 
 interface NavbarProps {
     onCartButtonClick: () => void;
+    cartCount: number;
 }
 
 function Link({ to, children }: { to: string; children: React.ReactNode }) {
@@ -18,7 +19,7 @@ function Link({ to, children }: { to: string; children: React.ReactNode }) {
     );
 }
 
-function Navbar({ onCartButtonClick }: NavbarProps) {
+function Navbar({ onCartButtonClick, cartCount }: NavbarProps) {
   return (
     <nav>
       <a className="logo" href='/'>
@@ -32,7 +33,7 @@ function Navbar({ onCartButtonClick }: NavbarProps) {
         <Link to="/categories">Categories</Link>
       </div>
       <div className="cart-icon">
-        <button onClick={onCartButtonClick}>Cart</button>
+        <button onClick={onCartButtonClick}>Cart({cartCount})</button>
       </div>
       <div className="user-profile">
         {/* User profile icon component */}

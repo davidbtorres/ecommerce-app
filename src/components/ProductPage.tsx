@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './../css/product.css';
 
 
-interface ProductProps {
+interface ProductPageProps {
     productId: string;
+    onAddToCart: (product: Product) => void;
 }
 
+// TODO - make global product type
 interface Product {
     id: string;
     image: string;
@@ -13,9 +15,10 @@ interface Product {
     price: number;
     category: string;
     description: string;
+    quantity: number;
 }
 
-function Product({ productId }: ProductProps) {
+function ProductPage({ productId, onAddToCart }: ProductPageProps) {
     const [product, setProduct] = useState<Product | null>(null);
 
     useEffect(() => {
@@ -30,20 +33,25 @@ function Product({ productId }: ProductProps) {
         }
     
         fetchProduct();
-      }, []);
+    }, []);
 
+    const handleAddToCart = () => {
+        if (product) {
+            onAddToCart(product);
+        }
+    }
     
     return (
         <div className="product">
             {product ? (
-                    <> {/* will not leave 'div' in the markup - same as React.Fragment */}
+                    <> {/* will not leave 'div' in the markup - same as <React.Fragment> */}
                         <div className="product-image">
                             <img src={product.image} alt={product.title} />
                         </div>
                         <div className="product-details">
                             <h2>{product.title}</h2>
                             <p>Price: {product.price}</p>
-                            <button>Add to Cart</button>
+                            <button onClick={handleAddToCart}>Add to Cart</button>
                         </div>
                     </>
                 ) : (
@@ -53,4 +61,4 @@ function Product({ productId }: ProductProps) {
     )
 }
 
-export default Product;
+export default ProductPage;
