@@ -51,9 +51,6 @@ function Categories() {
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
     };
-
-    console.log(categories);
-    console.log(selectedCategory);
     
     return (
         <div>

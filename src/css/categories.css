@@ -1,7 +1,7 @@
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 5px; /* Spacing between grid items */
+    gap: 20px; /* Spacing between grid items */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     margin-left: 15%;

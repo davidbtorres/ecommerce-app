@@ -1,0 +1,15 @@
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh;
+    background-color: #fff;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(100%);
+    border-left: 1px solid;
+}
+  
+.cart-panel.open {
+    transform: translateX(0);
+}

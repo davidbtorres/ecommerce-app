@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './../css/product.css';
 
 
 interface ProductProps {
@@ -33,17 +34,20 @@ function Product({ productId }: ProductProps) {
 
     
     return (
-        <div>
+        <div className="product">
             {product ? (
-                <div>
-                    <h2>{product.title}</h2>
-                    <img src={product.image} alt={product.title} />
-                    <p>{product.description}</p>
-                    <p>Price: {product.price}</p>
-                    <button>Add to Cart</button>
-                </div>
+                    <> {/* will not leave 'div' in the markup - same as React.Fragment */}
+                        <div className="product-image">
+                            <img src={product.image} alt={product.title} />
+                        </div>
+                        <div className="product-details">
+                            <h2>{product.title}</h2>
+                            <p>Price: {product.price}</p>
+                            <button>Add to Cart</button>
+                        </div>
+                    </>
                 ) : (
-                <p>Loading...</p>
+                    <p>Loading...</p>
                 )}
         </div>
     )

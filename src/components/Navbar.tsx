@@ -1,6 +1,10 @@
 import React from 'react';
 import './../css/navbar.css';
 
+interface NavbarProps {
+    onCartButtonClick: () => void;
+}
+
 function Link({ to, children }: { to: string; children: React.ReactNode }) {
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
@@ -14,7 +18,7 @@ function Link({ to, children }: { to: string; children: React.ReactNode }) {
     );
 }
 
-function Navbar() {
+function Navbar({ onCartButtonClick }: NavbarProps) {
   return (
     <nav>
       <a className="logo" href='/'>
@@ -28,7 +32,7 @@ function Navbar() {
         <Link to="/categories">Categories</Link>
       </div>
       <div className="cart-icon">
-        {/* Cart icon component */}
+        <button onClick={onCartButtonClick}>Cart</button>
       </div>
       <div className="user-profile">
         {/* User profile icon component */}

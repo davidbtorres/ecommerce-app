@@ -2,8 +2,12 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Categories from './components/Categories';
 import Product from './components/Product';
+import Cart from './components/Cart';
+import { useState } from 'react';
 
 function App() {
+
+  // routing handler
   const currentPath = window.location.pathname;
 
   let content = null;
@@ -14,9 +18,18 @@ function App() {
     content = <Product productId={productId} />;
   }
 
+  // cart handler
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleCart = () => {
+    console.log(isCartOpen);
+    setIsCartOpen(!isCartOpen);
+  };
+
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar onCartButtonClick={toggleCart}/>
+      {isCartOpen && <Cart onClose={toggleCart}/>}
       {content}
     </div>
   )
