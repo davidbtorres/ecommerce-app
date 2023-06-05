@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
 
-const Route = ({ path, component: Component, ...props }) => {
+type RouteProps = {
+  path: string
+  component: React.ComponentType<any>
+  onAddToCart?: (newProduct: ProductItem) => void
+}
+
+const Route = ({ path, component: Component, ...props }: RouteProps) => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
   useEffect(() => {

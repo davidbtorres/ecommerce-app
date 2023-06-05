@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-interface Product {
-  id: number
-  image: string
-  title: string
-  price: number
-}
-
 function ProductList() {
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<ProductItem[]>([])
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const response = await fetch('https://fakestoreapi.com/products')
-        const data: Product[] = await response.json()
+        const data: ProductItem[] = await response.json()
         setProducts(data)
       } catch (error) {
         console.error('Error fetching products:', error)

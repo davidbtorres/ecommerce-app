@@ -7,20 +7,10 @@ import Route from './components/Route'
 import { useState, useMemo } from 'react'
 import ProductList from './components/ProductList'
 
-interface ProductCartItem {
-  id: string
-  image: string
-  title: string
-  price: number
-  category: string
-  description: string
-  quantity: number
-}
-
 function App() {
   // state variables
   const [isCartOpen, setIsCartOpen] = useState(false)
-  const [cartProducts, setCartProducts] = useState<ProductCartItem[]>([])
+  const [cartProducts, setCartProducts] = useState<ProductItem[]>([])
   const cartCount = useMemo(() => {
     return cartProducts.reduce((count, product) => count + product.quantity, 0)
   }, [cartProducts])
@@ -28,9 +18,7 @@ function App() {
   // cart handling
   const toggleCart = () => setIsCartOpen(!isCartOpen)
 
-  const handleAddToCart = (newProduct: ProductCartItem) => {
-    // setCartCount(cartCount + 1); should no longer need due to memoization
-
+  const handleAddToCart = (newProduct: ProductItem) => {
     setCartProducts((prevProducts) =>
       prevProducts.some((p) => p.id === newProduct.id)
         ? // we have a product that is already in array (dup item) - return every other array item as normal but return dup item with incremented quantity
@@ -42,35 +30,11 @@ function App() {
     )
   }
 
-  const handleRemoveFromCart = (product: ProductCartItem) => {
-    // setCartCount(cartCount - product.quantity); should no longer need due to memoization
-
+  const handleRemoveFromCart = (product: ProductItem) => {
     setCartProducts((prevProducts) =>
       prevProducts.filter((p) => p.id !== product.id)
     )
   }
-
-  // const navigate = (path: string) => {
-  //   window.history.replaceState(null, '', path)
-  // }
-
-  // routing handling
-  //let content = null
-
-  // useEffect(() => {
-  //   const currentPath = window.location.pathname
-
-  //   navigate(currentPath)
-
-  //   if (currentPath === '/categories') {
-  //     content = <Categories />
-  //   } else if (currentPath.startsWith('/product/')) {
-  //     const productId = currentPath.substring('/product/'.length)
-  //     content = (
-  //       <ProductPage onAddToCart={handleAddToCart} productId={productId} />
-  //     )
-  //   }
-  // }, [])
 
   return (
     <div className="App">

@@ -1,33 +1,18 @@
 import React from 'react'
 import './../css/cart.css'
 
-interface Product {
-  id: string
-  image: string
-  title: string
-  price: number
-  category: string
-  description: string
-  quantity: number
-}
-
-interface CartProps {
-  cartProducts: Product[]
+type CartProps = {
+  cartProducts: ProductItem[]
   onClose: () => void
-  onRemoveProduct: (product: Product) => void
+  onRemoveProduct: (product: ProductItem) => void
 }
 
-function ProductCard({
-  product,
-  onRemoveProduct,
-}: {
-  product: Product
-  onRemoveProduct: (product: Product) => void
-}) {
-  // const handleRemoveProduct = () => { moved inline
-  //   onRemoveProduct(product)
-  // }
+type ProductCartCard = {
+  product: ProductItem
+  onRemoveProduct: (product: ProductItem) => void
+}
 
+function ProductCard({ product, onRemoveProduct }: ProductCartCard) {
   return (
     <div className="cart-product-card">
       <img src={product.image} alt={product.title} />

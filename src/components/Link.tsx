@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-interface LinkProps {
+type LinkProps = {
   to: string
   children: ReactNode
 }
