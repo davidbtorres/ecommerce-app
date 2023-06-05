@@ -19,7 +19,6 @@ interface Product {
 function ProductPage({ onAddToCart }: ProductPageProps) {
   const [product, setProduct] = useState<Product | null>(null)
   const productId = window.location.pathname.split('/product/')[1]
-  console.log(productId)
 
   useEffect(() => {
     async function fetchProduct() {

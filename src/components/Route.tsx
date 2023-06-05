@@ -11,8 +11,6 @@ const Route = ({ path, component: Component, ...props }) => {
     return () => window.removeEventListener('navigate', onLocationChange) // must remove event to prevent multiple path changes
   }, [])
 
-  console.log('Routing to: ' + path + ', currentPath: ' + currentPath)
-
   // will test that the url matches the format without needing to be exact.
   const isMatch = new RegExp(`^${path.replace(/:\w+/g, '\\d+')}$`).test(
     currentPath
