@@ -9,7 +9,7 @@ const Link = ({ to, children }: LinkProps) => {
   const preventReload = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault() // prevents setting path and stepping on state
     window.history.pushState({}, '', to)
-    const navigationEvent = new PopStateEvent('navigate') // tell router that path has been changed and page needs rerendering
+    const navigationEvent = new PopStateEvent('popstate') // tell router that path has been changed and page needs rerendering
     window.dispatchEvent(navigationEvent)
   }
 

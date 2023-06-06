@@ -13,8 +13,8 @@ const Route = ({ path, component: Component, ...props }: RouteProps) => {
     const onLocationChange = () => {
       setCurrentPath(window.location.pathname) // after a navigation event, check what current window path is set to
     }
-    window.addEventListener('navigate', onLocationChange) // listen for navigation events
-    return () => window.removeEventListener('navigate', onLocationChange) // must remove event to prevent multiple path changes
+    window.addEventListener('popstate', onLocationChange) // listen for navigation events
+    return () => window.removeEventListener('popstate', onLocationChange) // must remove event to prevent multiple path changes
   }, [])
 
   // will test that the url matches the format without needing to be exact.
