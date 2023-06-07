@@ -7,3 +7,5 @@ type ProductItem = {
   description: string
   quantity: number
 }
+
+type Category = string
