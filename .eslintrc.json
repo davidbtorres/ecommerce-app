@@ -16,7 +16,7 @@
       },
       "ecmaVersion": 12,
       "sourceType": "module",
-      "project": ["./ecommerce-app/tsconfig.json"]
+      "project": ["./tsconfig.json"]
     },
     "plugins": ["react", "@typescript-eslint"],
     "rules": {
