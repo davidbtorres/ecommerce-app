@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Link from './Link'
 import './../css/categories.css'
+import { Link } from 'react-router-dom'
 
 function Categories() {
   const [categories, setCategories] = useState<Category[]>([])

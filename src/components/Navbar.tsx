@@ -1,25 +1,11 @@
 import React from 'react'
-import Link from './Link'
+import { Link } from 'react-router-dom'
 import './../css/navbar.css'
 
 interface NavbarProps {
   onCartButtonClick: () => void
   cartCount: number
 }
-
-/* moved into Link.tsx */
-// function Link({ to, children }: { to: string; children: React.ReactNode }) {
-//   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-//     event.preventDefault()
-//     window.location.href = to
-//   }
-
-//   return (
-//     <a href={to} onClick={handleClick}>
-//       {children}
-//     </a>
-//   )
-// }
 
 function Navbar({ onCartButtonClick, cartCount }: NavbarProps) {
   return (

@@ -3,9 +3,9 @@ import Navbar from './components/Navbar'
 import Categories from './components/Categories'
 import ProductPage from './components/ProductPage'
 import Cart from './components/Cart'
-import Route from './components/Route'
 import { useState, useMemo } from 'react'
 import ProductList from './components/ProductList'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   // state variables
@@ -46,13 +46,14 @@ function App() {
           onRemoveProduct={handleRemoveFromCart}
         />
       ) : null}
-      <Route path={'/'} component={ProductList} />
-      <Route path={'/categories'} component={Categories} />
-      <Route
-        path={'/product/:id'}
-        component={ProductPage}
-        onAddToCart={handleAddToCart}
-      />
+      <Routes>
+        <Route path={'/'} element={<ProductList />} />
+        <Route path={'/categories'} element={<Categories />} />
+        <Route
+          path={'/product/:id'}
+          element={<ProductPage onAddToCart={handleAddToCart} />}
+        />
+      </Routes>
     </div>
   )
 }
