@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import ky from 'ky'
 import './../css/product.css'
 
 interface ProductPageProps {
-  onAddToCart: (product: Product) => void
-}
-
-// TODO - make global product type
-interface Product {
-  id: string
-  image: string
-  title: string
-  price: number
-  category: string
-  description: string
-  quantity: number
+  onAddToCart: (product: ProductItem) => void
 }
 
 function ProductPage({ onAddToCart }: ProductPageProps) {
-  const [product, setProduct] = useState<Product | null>(null)
+  const [product, setProduct] = useState<ProductItem | null>(null)
   const productId = window.location.pathname.split('/product/')[1]
 
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const response = await fetch(
+        const response = ky.get(
           `https://fakestoreapi.com/products/${productId}`
         )
-        const data = await response.json()
+        const data: ProductItem = await response.json()
         setProduct(data)
       } catch (error) {
         console.error('Error fetching product:', error)

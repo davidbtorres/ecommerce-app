@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './../css/categories.css'
 import { Link } from 'react-router-dom'
+import ky from 'ky'
 
 function Categories() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -12,9 +13,7 @@ function Categories() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch(
-          'https://fakestoreapi.com/products/categories'
-        )
+        const response = ky.get('https://fakestoreapi.com/products/categories')
         const data: Category[] = await response.json()
         setCategories(data)
       } catch (error) {
@@ -29,7 +28,7 @@ function Categories() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('https://fakestoreapi.com/products')
+        const response = ky.get('https://fakestoreapi.com/products')
         const data: ProductItem[] = await response.json()
         setProducts(data)
       } catch (error) {

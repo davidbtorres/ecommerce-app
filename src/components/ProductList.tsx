@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ky from 'ky'
 
 function ProductList() {
   const [products, setProducts] = useState<ProductItem[]>([])
@@ -6,7 +7,7 @@ function ProductList() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('https://fakestoreapi.com/products')
+        const response = ky.get('https://fakestoreapi.com/products')
         const data: ProductItem[] = await response.json()
         setProducts(data)
       } catch (error) {
