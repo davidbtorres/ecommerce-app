@@ -1,43 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './../css/categories.css'
 import { Link } from 'react-router-dom'
 import ky from 'ky'
+import { useQuery } from 'react-query'
 
 function Categories() {
-  const [categories, setCategories] = useState<Category[]>([])
   const [selectedCategory, setSelectedCategory] = useState('all')
 
-  const [products, setProducts] = useState<ProductItem[]>([])
+  const categoriesQuery = useQuery('categories', fetchCategories)
+  const productsQuery = useQuery('products', fetchProducts)
 
-  // fetch array of categories for selectable filters
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const response = ky.get('https://fakestoreapi.com/products/categories')
-        const data: Category[] = await response.json()
-        setCategories(data)
-      } catch (error) {
-        console.error('Error fetching categories:', error)
-      }
-    }
+  const categories = categoriesQuery.data || []
+  const products = productsQuery.data || []
+  const isLoading = categoriesQuery.isLoading || productsQuery.isLoading
+  const isError = categoriesQuery.isError || productsQuery.isError
 
-    fetchCategories()
-  }, [])
+  async function fetchCategories() {
+    const response = ky.get('https://fakestoreapi.com/products/categories')
+    const data: Category[] = await response.json()
+    return data
+  }
 
-  // fetch array of product objects for display based on current filter
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = ky.get('https://fakestoreapi.com/products')
-        const data: ProductItem[] = await response.json()
-        setProducts(data)
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
-
-    fetchProducts()
-  }, [])
+  async function fetchProducts() {
+    const response = ky.get('https://fakestoreapi.com/products')
+    const data: ProductItem[] = await response.json()
+    return data
+  }
 
   // select filter
   const handleCategoryClick = (category: string) => {
@@ -46,35 +34,45 @@ function Categories() {
 
   return (
     <div>
-      <ul>
-        {/* Render category links */}
-        <li>
-          <button onClick={() => handleCategoryClick('all')}>All</button>
-        </li>
-        {categories.map((category) => (
-          <li key={category}>
-            <button onClick={() => handleCategoryClick(category)}>
-              {category}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : isError ? (
+        <p>Error fetching data</p>
+      ) : (
+        <div>
+          <ul>
+            {/* Render category links */}
+            <li>
+              <button onClick={() => handleCategoryClick('all')}>All</button>
+            </li>
+            {categories.map((category) => (
+              <li key={category}>
+                <button onClick={() => handleCategoryClick(category)}>
+                  {category}
+                </button>
+              </li>
+            ))}
+          </ul>
 
-      {/* Render products based on selected category */}
-      <div className="product-grid">
-        {(selectedCategory === 'all'
-          ? products
-          : products.filter((product) => product.category === selectedCategory)
-        ).map((product) => (
-          <Link to={`/product/${product.id}`} key={product.id}>
-            <div className="product-card">
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>${product.price}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+          {/* Render products based on selected category */}
+          <div className="product-grid">
+            {(selectedCategory === 'all'
+              ? products
+              : products.filter(
+                  (product) => product.category === selectedCategory
+                )
+            ).map((product) => (
+              <Link to={`/product/${product.id}`} key={product.id}>
+                <div className="product-card">
+                  <img src={product.image} alt={product.title} />
+                  <h3>{product.title}</h3>
+                  <p>${product.price}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
