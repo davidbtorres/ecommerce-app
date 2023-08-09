@@ -6,14 +6,14 @@ type ProductPageProps = {
   onAddToCart: (product: ProductItem) => void
 }
 
-function ProductPage({ onAddToCart }: ProductPageProps) {
+function Product({ onAddToCart }: ProductPageProps) {
   //const productId = window.location.pathname.split('/product/')[1]
   const { productId } = useParams<'productId'>()
-  const productQuery = productId ? useProductQuery(productId) : null
+  const productQuery = useProductQuery(productId)
 
-  const product = productQuery?.data || null
-  const isLoading = productQuery?.isLoading
-  const isError = productQuery?.isError
+  const product = productQuery.data || null
+  const isLoading = productQuery.isLoading
+  const isError = productQuery.isError
 
   const handleAddToCart = () => {
     if (product) {
@@ -54,4 +54,4 @@ function ProductPage({ onAddToCart }: ProductPageProps) {
   )
 }
 
-export default ProductPage
+export default Product

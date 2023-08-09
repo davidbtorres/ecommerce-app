@@ -1,12 +1,10 @@
-import { useQuery } from 'react-query'
-import ky from 'ky'
+import withQuery from './withQuery'
 
 function useProductsQuery() {
-  return useQuery('products', async () => {
-    const response = ky.get('https://fakestoreapi.com/products')
-    const data: ProductItem[] = await response.json()
-    return data
-  })
+  return withQuery<ProductItem[]>(
+    'products',
+    'https://fakestoreapi.com/products'
+  )
 }
 
 export default useProductsQuery

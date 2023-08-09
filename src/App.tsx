@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Categories from './components/Categories'
-import ProductPage from './pages/Product'
+import Product from './pages/Product'
 import Cart from './components/Cart'
 import { useState, useMemo } from 'react'
 import { Routes, Route } from 'react-router-dom'
@@ -51,7 +51,7 @@ function App() {
         <Route path={'/categories'} element={<Categories />} />
         <Route
           path={'/product/:productId'}
-          element={<ProductPage onAddToCart={handleAddToCart} />}
+          element={<Product onAddToCart={handleAddToCart} />}
         />
       </Routes>
     </div>

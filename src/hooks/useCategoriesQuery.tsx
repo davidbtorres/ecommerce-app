@@ -1,12 +1,10 @@
-import { useQuery } from 'react-query'
-import ky from 'ky'
+import withQuery from './withQuery'
 
 function useCategoriesQuery() {
-  return useQuery('categories', async () => {
-    const response = ky.get('https://fakestoreapi.com/products/categories')
-    const data: Category[] = await response.json()
-    return data
-  })
+  return withQuery<Category[]>(
+    'categories',
+    'https://fakestoreapi.com/products/categories'
+  )
 }
 
 export default useCategoriesQuery
