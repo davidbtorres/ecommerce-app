@@ -22,31 +22,35 @@ function ProductPage({ onAddToCart }: ProductPageProps) {
   }
 
   return (
-    <div>
+    <>
       {isLoading ? (
         <p>Loading...</p>
       ) : isError ? (
         <p>Error fetching data</p>
       ) : (
-        <div className="product">
+        <>
           {product ? (
-            <>
-              {/* will not leave 'div' in the markup - same as <React.Fragment> */}
+            <div className="product-container">
               <div className="product-image">
                 <img src={product.image} alt={product.title} />
               </div>
               <div className="product-details">
                 <h2>{product.title}</h2>
-                <p>Price: {product.price}</p>
-                <button onClick={handleAddToCart}>Add to Cart</button>
+                <p>{product.description}</p>
+                <p className="product-price-text">${product.price}</p>
+                <div className="button-container">
+                  <button className="product-button" onClick={handleAddToCart}>
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-            </>
+            </div>
           ) : (
             <p>Loading...</p>
           )}
-        </div>
+        </>
       )}
-    </div>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Categories from './components/Categories'
-import ProductPage from './components/ProductPage'
+import ProductPage from './pages/Product'
 import Cart from './components/Cart'
 import { useState, useMemo } from 'react'
 import { Routes, Route } from 'react-router-dom'
