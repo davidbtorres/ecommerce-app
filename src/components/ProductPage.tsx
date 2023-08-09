@@ -1,24 +1,19 @@
-import ky from 'ky'
-import { useQuery } from 'react-query'
 import './../css/product.css'
+import { useParams } from 'react-router-dom'
+import useProductQuery from '../hooks/useProductQuery'
 
 type ProductPageProps = {
   onAddToCart: (product: ProductItem) => void
 }
 
 function ProductPage({ onAddToCart }: ProductPageProps) {
-  const productQuery = useQuery('product', fetchProduct)
+  //const productId = window.location.pathname.split('/product/')[1]
+  const { productId } = useParams<'productId'>()
+  const productQuery = productId ? useProductQuery(productId) : null
 
-  const product = productQuery.data || null
-  const isLoading = productQuery.isLoading
-  const isError = productQuery.isError
-
-  const productId = window.location.pathname.split('/product/')[1]
-  async function fetchProduct() {
-    const response = ky.get(`https://fakestoreapi.com/products/${productId}`)
-    const data: ProductItem = await response.json()
-    return data
-  }
+  const product = productQuery?.data || null
+  const isLoading = productQuery?.isLoading
+  const isError = productQuery?.isError
 
   const handleAddToCart = () => {
     if (product) {

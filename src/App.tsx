@@ -50,7 +50,7 @@ function App() {
         <Route path={'/'} element={<Home />} />
         <Route path={'/categories'} element={<Categories />} />
         <Route
-          path={'/product/:id'}
+          path={'/product/:productId'}
           element={<ProductPage onAddToCart={handleAddToCart} />}
         />
       </Routes>

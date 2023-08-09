@@ -1,31 +1,19 @@
 import React, { useState } from 'react'
 import './../css/categories.css'
 import { Link } from 'react-router-dom'
-import ky from 'ky'
-import { useQuery } from 'react-query'
+import useCategoriesQuery from '../hooks/useCategoriesQuery'
+import useProductsQuery from '../hooks/useProductsQuery'
 
 function Categories() {
   const [selectedCategory, setSelectedCategory] = useState('all')
 
-  const categoriesQuery = useQuery('categories', fetchCategories)
-  const productsQuery = useQuery('products', fetchProducts)
+  const categoriesQuery = useCategoriesQuery()
+  const productsQuery = useProductsQuery()
 
   const categories = categoriesQuery.data || []
   const products = productsQuery.data || []
   const isLoading = categoriesQuery.isLoading || productsQuery.isLoading
   const isError = categoriesQuery.isError || productsQuery.isError
-
-  async function fetchCategories() {
-    const response = ky.get('https://fakestoreapi.com/products/categories')
-    const data: Category[] = await response.json()
-    return data
-  }
-
-  async function fetchProducts() {
-    const response = ky.get('https://fakestoreapi.com/products')
-    const data: ProductItem[] = await response.json()
-    return data
-  }
 
   // select filter
   const handleCategoryClick = (category: string) => {
