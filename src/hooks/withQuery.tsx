@@ -1,8 +1,8 @@
-import { useQuery, UseQueryOptions } from 'react-query'
+import { QueryKey, useQuery, UseQueryOptions } from 'react-query'
 import ky from 'ky'
 
 function withQuery<T>(
-  queryKey: string,
+  queryKey: QueryKey,
   url: string,
   options?: UseQueryOptions<T, unknown>
 ) {
@@ -13,7 +13,11 @@ function withQuery<T>(
       const data: T = await response.json()
       return data
     },
-    options
+    {
+      enabled:
+        !Array.isArray(queryKey) || queryKey.every((key) => key !== undefined),
+      ...(options || {}),
+    }
   )
 }
 

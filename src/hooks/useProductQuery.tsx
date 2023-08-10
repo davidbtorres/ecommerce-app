@@ -2,7 +2,7 @@ import withQuery from './withQuery'
 
 function useProductQuery(productId: string | undefined) {
   return withQuery<ProductItem>(
-    `product-${productId}`,
+    ['product', productId],
     `https://fakestoreapi.com/products/${productId}`
   )
 }
