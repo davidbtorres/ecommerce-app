@@ -23,7 +23,11 @@ function Navbar({ onCartButtonClick, cartCount }: NavbarProps) {
       <div className="cart-icon">
         <button onClick={onCartButtonClick}>Cart({cartCount})</button>
       </div>
-      <div className="user-profile">{/* User profile icon component */}</div>
+      <div className="user-profile">
+        <Link to="/signin">
+          <p>sign in</p>
+        </Link>
+      </div>
     </nav>
   )
 }

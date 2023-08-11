@@ -6,6 +6,8 @@ import Cart from './components/Cart'
 import { useState, useMemo } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 
 function App() {
   // state variables
@@ -53,6 +55,8 @@ function App() {
           path={'/product/:productId'}
           element={<Product onAddToCart={handleAddToCart} />}
         />
+        <Route path={'/signin'} element={<SignIn />} />
+        <Route path={'/signup'} element={<SignUp />} />
       </Routes>
     </div>
   )
