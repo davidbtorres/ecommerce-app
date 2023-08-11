@@ -1,11 +1,11 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Categories from './components/Categories'
-import ProductPage from './components/ProductPage'
+import Product from './pages/Product'
 import Cart from './components/Cart'
 import { useState, useMemo } from 'react'
-import ProductList from './components/ProductList'
 import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
 
 function App() {
   // state variables
@@ -47,11 +47,11 @@ function App() {
         />
       ) : null}
       <Routes>
-        <Route path={'/'} element={<ProductList />} />
+        <Route path={'/'} element={<Home />} />
         <Route path={'/categories'} element={<Categories />} />
         <Route
-          path={'/product/:id'}
-          element={<ProductPage onAddToCart={handleAddToCart} />}
+          path={'/product/:productId'}
+          element={<Product onAddToCart={handleAddToCart} />}
         />
       </Routes>
     </div>

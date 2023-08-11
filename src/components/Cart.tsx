@@ -28,15 +28,19 @@ function Cart({ cartProducts, onClose, onRemoveProduct }: CartProps) {
   return (
     <div className="cart-panel open">
       <h1>Your Cart</h1>
-      <div className="cart-product-list">
-        {cartProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onRemoveProduct={onRemoveProduct}
-          />
-        ))}
-      </div>
+      {cartProducts.length == 0 ? (
+        <p>Your cart is empty!</p>
+      ) : (
+        <div className="cart-product-list">
+          {cartProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onRemoveProduct={onRemoveProduct}
+            />
+          ))}
+        </div>
+      )}
       <button onClick={onClose}>Continue Browsing</button>
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './../css/navbar.css'
 
-interface NavbarProps {
+type NavbarProps = {
   onCartButtonClick: () => void
   cartCount: number
 }
