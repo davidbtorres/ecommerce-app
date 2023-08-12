@@ -15,3 +15,8 @@ type User = {
   email: string
   password: string
 }
+
+type Creds = {
+  email: string
+  password: string
+}

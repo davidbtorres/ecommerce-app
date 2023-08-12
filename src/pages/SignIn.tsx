@@ -3,33 +3,51 @@ import './../css/form.css'
 import { Link } from 'react-router-dom'
 
 type Inputs = {
+  name: string
   email: string
+  password: string
   emailRequired: string
 }
 
-function SignIn() {
+type SignUpProps = {
+  signIn: (input: User) => void
+}
+
+function SignIn({ signIn }: SignUpProps) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => signIn(data)
 
-  console.log(watch('email')) // watch input value by passing the name of it
+  watch('email')
 
   return (
     <div className="form-container">
+      <h2>Sign in</h2>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="enter an email" {...register('email')} />
-
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register('emailRequired', { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.emailRequired && <span>This field is required</span>}
-
-        <input type="submit" />
+        <div>
+          <label>email:</label>
+          <input
+            defaultValue="enter your email"
+            type="email"
+            {...register('email', { required: true })}
+          />
+          {errors.email && <span>This field is required</span>}
+        </div>
+        <div>
+          <label>password:</label>
+          <input
+            type="password"
+            {...register('password', { required: true })}
+          />
+          {errors.password && <span>This field is required</span>}
+        </div>
+        <div>
+          <input type="submit" />
+        </div>
       </form>
       <div className="link-container">
         <Link to="/signup">

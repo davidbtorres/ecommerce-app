@@ -18,6 +18,7 @@ function App() {
   }, [cartProducts])
 
   const [users, setUsers] = useState<User[]>([])
+  const [currentUser, setCurrentUser] = useState<User>()
 
   // cart handling
   const toggleCart = () => setIsCartOpen(!isCartOpen)
@@ -50,6 +51,16 @@ function App() {
     console.log(users)
   }
 
+  const handleSignIn = (creds: Creds) => {
+    const existingUser = users.find((users) => users.email === creds.email)
+    if (existingUser) {
+      setCurrentUser(existingUser)
+      console.log(`SUCCESS: signed in as ${currentUser?.name}`)
+    } else {
+      console.error('ERROR: user does not exist.')
+    }
+  }
+
   return (
     <div className="App">
       <Navbar onCartButtonClick={toggleCart} cartCount={cartCount} />
@@ -67,7 +78,7 @@ function App() {
           path={'/product/:productId'}
           element={<Product onAddToCart={handleAddToCart} />}
         />
-        <Route path={'/signin'} element={<SignIn />} />
+        <Route path={'/signin'} element={<SignIn signIn={handleSignIn} />} />
         <Route path={'/signup'} element={<SignUp addUser={handleAddUser} />} />
       </Routes>
     </div>
