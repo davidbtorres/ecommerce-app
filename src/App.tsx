@@ -17,6 +17,8 @@ function App() {
     return cartProducts.reduce((count, product) => count + product.quantity, 0)
   }, [cartProducts])
 
+  const [users, setUsers] = useState<User[]>([])
+
   // cart handling
   const toggleCart = () => setIsCartOpen(!isCartOpen)
 
@@ -38,6 +40,16 @@ function App() {
     )
   }
 
+  const handleAddUser = (newUser: User) => {
+    const duplicateUser = users.find((user) => user.email === newUser.email)
+    if (duplicateUser) {
+      console.error('ERROR: email already in use.')
+    } else {
+      setUsers((prevUsers) => [...prevUsers, newUser])
+    }
+    console.log(users)
+  }
+
   return (
     <div className="App">
       <Navbar onCartButtonClick={toggleCart} cartCount={cartCount} />
@@ -56,7 +68,7 @@ function App() {
           element={<Product onAddToCart={handleAddToCart} />}
         />
         <Route path={'/signin'} element={<SignIn />} />
-        <Route path={'/signup'} element={<SignUp />} />
+        <Route path={'/signup'} element={<SignUp addUser={handleAddUser} />} />
       </Routes>
     </div>
   )

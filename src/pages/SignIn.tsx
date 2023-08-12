@@ -31,9 +31,11 @@ function SignIn() {
 
         <input type="submit" />
       </form>
-      <Link to="/signup">
-        <p className="link-text">Create an account</p>
-      </Link>
+      <div className="link-container">
+        <Link to="/signup">
+          <p className="link-text">Create an account</p>
+        </Link>
+      </div>
     </div>
   )
 }

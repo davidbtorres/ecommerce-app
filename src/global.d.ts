@@ -9,3 +9,9 @@ type ProductItem = {
 }
 
 type Category = string
+
+type User = {
+  name: string
+  email: string
+  password: string
+}

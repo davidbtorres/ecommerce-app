@@ -19,6 +19,12 @@
     flex-direction: row;
 }
 
+.link-container {
+    display: inline;
+    margin-top: 15px;
+}
+
 .link-text {
+    display: inline;
     color: lightskyblue;
 }
