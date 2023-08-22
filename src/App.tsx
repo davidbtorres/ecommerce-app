@@ -44,20 +44,20 @@ function App() {
   const handleAddUser = (newUser: User) => {
     const duplicateUser = users.find((user) => user.email === newUser.email)
     if (duplicateUser) {
-      console.error('ERROR: email already in use.')
+      window.alert('ERROR: email already in use.')
     } else {
       setUsers((prevUsers) => [...prevUsers, newUser])
     }
-    console.log(users)
   }
 
   const handleSignIn = (creds: Creds) => {
     const existingUser = users.find((users) => users.email === creds.email)
     if (existingUser) {
       setCurrentUser(existingUser)
-      console.log(`SUCCESS: signed in as ${currentUser?.name}`)
+      window.alert(`SUCCESS: signed in as ${currentUser?.name}`)
     } else {
       console.error('ERROR: user does not exist.')
+      window.alert('ERROR: user does not exist.')
     }
   }
 

@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import './../css/form.css'
 import { Link } from 'react-router-dom'
 
@@ -20,38 +20,37 @@ function SignUp({ addUser }: SignUpProps) {
     watch,
     formState: { errors },
   } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => addUser(data)
 
   watch('email')
 
   return (
     <div className="form-container">
       <h2>Create new account</h2>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form" onSubmit={handleSubmit((data) => addUser(data))}>
         <div>
           <label>name:</label>
           <input
-            defaultValue="enter a name"
-            {...register('name', { required: true })}
+            placeholder="enter a name"
+            {...register('name', { required: 'Name is required' })}
           />
-          {errors.name && <span>This field is required</span>}
+          {errors.name && <span>{errors.name.message}</span>}
         </div>
         <div>
           <label>email:</label>
           <input
-            defaultValue="enter an email"
+            placeholder="enter an email"
             type="email"
-            {...register('email', { required: true })}
+            {...register('email', { required: 'Email is required' })}
           />
-          {errors.email && <span>This field is required</span>}
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div>
           <label>password:</label>
           <input
             type="password"
-            {...register('password', { required: true })}
+            {...register('password', { required: 'Password is required' })}
           />
-          {errors.password && <span>This field is required</span>}
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div>
           <input type="submit" />
