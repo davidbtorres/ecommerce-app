@@ -43,6 +43,7 @@ function App() {
 
   const handleAddUser = (newUser: User) => {
     const duplicateUser = users.find((user) => user.email === newUser.email)
+    console.log('User added: ' + newUser)
     if (duplicateUser) {
       window.alert('ERROR: email already in use.')
     } else {
