@@ -6,6 +6,8 @@ import Cart from './components/Cart'
 import { useState, useMemo } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 
 function App() {
   // state variables
@@ -14,6 +16,9 @@ function App() {
   const cartCount = useMemo(() => {
     return cartProducts.reduce((count, product) => count + product.quantity, 0)
   }, [cartProducts])
+
+  const [users, setUsers] = useState<User[]>([])
+  const [currentUser, setCurrentUser] = useState<User>()
 
   // cart handling
   const toggleCart = () => setIsCartOpen(!isCartOpen)
@@ -36,6 +41,27 @@ function App() {
     )
   }
 
+  const handleAddUser = (newUser: User) => {
+    const duplicateUser = users.find((user) => user.email === newUser.email)
+    console.log('User added: ' + newUser)
+    if (duplicateUser) {
+      window.alert('ERROR: email already in use.')
+    } else {
+      setUsers((prevUsers) => [...prevUsers, newUser])
+    }
+  }
+
+  const handleSignIn = (creds: Creds) => {
+    const existingUser = users.find((users) => users.email === creds.email)
+    if (existingUser) {
+      setCurrentUser(existingUser)
+      window.alert(`SUCCESS: signed in as ${currentUser?.name}`)
+    } else {
+      console.error('ERROR: user does not exist.')
+      window.alert('ERROR: user does not exist.')
+    }
+  }
+
   return (
     <div className="App">
       <Navbar onCartButtonClick={toggleCart} cartCount={cartCount} />
@@ -53,6 +79,8 @@ function App() {
           path={'/product/:productId'}
           element={<Product onAddToCart={handleAddToCart} />}
         />
+        <Route path={'/signin'} element={<SignIn signIn={handleSignIn} />} />
+        <Route path={'/signup'} element={<SignUp addUser={handleAddUser} />} />
       </Routes>
     </div>
   )

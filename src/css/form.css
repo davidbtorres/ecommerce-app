@@ -1,0 +1,30 @@
+.form-container {
+    padding-top: 25px;
+    padding-left: 30%;
+    padding-right: 30%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-line {
+    display: flex;
+    flex-direction: row;
+}
+
+.link-container {
+    display: inline;
+    margin-top: 15px;
+}
+
+.link-text {
+    display: inline;
+    color: lightskyblue;
+}
