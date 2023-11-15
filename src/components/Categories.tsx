@@ -27,7 +27,7 @@ function Categories() {
       ) : isError ? (
         <p>Error fetching data</p>
       ) : (
-        <div>
+        <div className='mt-4 mb-4'>
           <ul>
             {/* Render category links */}
             <li>
@@ -43,22 +43,24 @@ function Categories() {
           </ul>
 
           {/* Render products based on selected category */}
-          <div className="product-grid">
-            {(selectedCategory === 'all'
-              ? products
-              : products.filter(
-                  (product) => product.category === selectedCategory
-                )
-            ).map((product) => (
-              <Link to={`/product/${product.id}`} key={product.id}>
-                <div className="product-card">
-                  <img src={product.image} alt={product.title} />
-                  <h3>{product.title}</h3>
-                  <p>${product.price}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <div className="container mx-auto px-20 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {(selectedCategory === 'all'
+                ? products
+                : products.filter(
+                    (product) => product.category === selectedCategory
+                  )
+              ).map((product) => (
+                <Link to={`/product/${product.id}`} key={product.id}>
+                  <div className="overflow-hidden bg-white p-4 h-full flex flex-col items-center rounded-lg transition-all duration-300 hover:border-black border border-transparent hover:border-solid shadow-lg">
+                    <img className="object-contain max-h-48 w-full mb-4" src={product.image} alt={product.title} />
+                    <h3 className='text-lg font-medium overflow-hidden line-clamp-1' title={product.title}>{product.title}</h3>
+                    <p className='text-gray-700'>${product.price}</p>
+                  </div>
+                </Link>
+              ))}
+              </div>
+            </div>
         </div>
       )}
     </div>

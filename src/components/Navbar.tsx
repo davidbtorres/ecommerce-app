@@ -10,7 +10,7 @@ type NavbarProps = {
 function Navbar({ onCartButtonClick, cartCount }: NavbarProps) {
   return (
     <nav>
-      <div className="logo">
+      <div className="ml-4 font-extrabold text-xl">
         <Link to={'/'}>E-Commerce App</Link>
       </div>
       <div className="search-bar">
